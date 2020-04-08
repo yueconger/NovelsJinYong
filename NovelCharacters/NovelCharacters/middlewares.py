@@ -4,8 +4,19 @@
 #
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-
+import random
+import requests
 from scrapy import signals
+from NovelCharacters.settings import USER_AGENTS
+
+
+class RandomUserAgent(object):
+    def __init__(self):
+        self.agents = USER_AGENTS
+
+    def process_request(self, request, spider):
+        # 随机获取请求头
+        request.headers.setdefault('User-Agent', random.choice(self.agents))
 
 
 class NovelcharactersSpiderMiddleware(object):
