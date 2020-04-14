@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import os
 # Scrapy settings for NovelCharacters project
 #
 # For simplicity, this file contains only settings considered important or
@@ -21,7 +21,7 @@ NEWSPIDER_MODULE = 'NovelCharacters.spiders'
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
-LOG_LEVEL = 'ERROR'
+# LOG_LEVEL = 'ERROR'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -29,7 +29,7 @@ LOG_LEVEL = 'ERROR'
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 0.3
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -67,9 +67,18 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'NovelCharacters.pipelines.NovelcharactersPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   # 'NovelCharacters.pipelines.NovelcharactersPipeline': 30,
+   'NovelCharacters.pipelines.MyImagesPipeline': 1,
+   # 'scrapy.pipelines.images.ImagesPipeline': 30
+}
+
+IMAGES_URLS_FIELD = 'character_img'
+project_dir = os.path.abspath(os.path.dirname(__file__))
+IMAGES_STORE = os.path.join(project_dir, 'images')  # 拼接为相对路径找到images文件夹
+# IMAGES_STORE = 'images'
+# 图片失效期限 天数
+# IMAGES_EXPIRES = 5
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

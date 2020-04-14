@@ -10,5 +10,19 @@ import scrapy
 
 class NovelcharactersItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    book_name = scrapy.Field()
+    character_url = scrapy.Field()
+    character_img = scrapy.Field()
+
+    character_name = scrapy.Field()
+    # book_name = scrapy.Field()
+    # book_name = scrapy.Field()
+    # book_name = scrapy.Field()
+    # book_name = scrapy.Field()
+    # book_name = scrapy.Field()
+
+
+class ImageItem(scrapy.Item):
+    character_img = scrapy.Field()
+    img_path = scrapy.Field()
+    image_path = scrapy.Field()
